@@ -149,10 +149,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     @Override
     public boolean onMenuItemClick(MenuItem item) {
 
-
-        // switch (item.getItemId())
+//         switch (item.getItemId())
 //        {
-//            case R.id.pin:
+//            case com.google.android.material.R.id.pin:
 //                if(selectedNotes.isPinned())
 //                {
 //                    database.mainDAO().pin(selectedNotes.getID(),false);
@@ -166,11 +165,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 //                notes.addAll(database.mainDAO().getALLnotes());
 //                notesListAdapter.notifyDataSetChanged();
 //                return  true;
-
-
-      //  }
-
-               return false;
+//
+//
+//        }
+//
+          return false;
     }
 
 
