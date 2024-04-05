@@ -146,32 +146,36 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         popupMenu.show();
 
     }
+
     @Override
     public boolean onMenuItemClick(MenuItem item) {
+        int id =  item.getItemId();
+        if(id== R.id.pin)
+        {
+            if(selectedNotes.isPinned())
+            {
+                database.mainDAO().pin(selectedNotes.getID(),false);
+                Toast.makeText(MainActivity.this, "Unpinned", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                database.mainDAO().pin(selectedNotes.getID(),true);
+                Toast.makeText(MainActivity.this, "Pinned", Toast.LENGTH_SHORT).show();
+            }
+            notes.clear();
+            notes.addAll(database.mainDAO().getALLnotes());
+            notesListAdapter.notifyDataSetChanged();
+            return true;
 
-//         switch (item.getItemId())
-//        {
-//            case com.google.android.material.R.id.pin:
-//                if(selectedNotes.isPinned())
-//                {
-//                    database.mainDAO().pin(selectedNotes.getID(),false);
-//                    Toast.makeText(MainActivity.this, "Unpinned", Toast.LENGTH_SHORT).show();
-//                }
-//                else {
-//                    database.mainDAO().pin(selectedNotes.getID(),true);
-//                    Toast.makeText(MainActivity.this, "Pinned", Toast.LENGTH_SHORT).show();
-//                }
-//                notes.clear();
-//                notes.addAll(database.mainDAO().getALLnotes());
-//                notesListAdapter.notifyDataSetChanged();
-//                return  true;
-//
-//
-//        }
-//
-          return false;
+        } else if (id==R.id.delete) {
+            database.mainDAO().delete(selectedNotes);
+            notes.remove(selectedNotes);
+            notesListAdapter.notifyDataSetChanged();
+            Toast.makeText(MainActivity.this,"Notes deleted",Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
+
     }
-
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
